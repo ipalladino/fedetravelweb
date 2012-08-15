@@ -7,7 +7,7 @@
 body{
 	 background: url(/backgound.jpg); 
 	 background-repeat:no-repeat;
-	 background-color:#000000;
+	 background-color:#ffffff;
 	 width:80%;
 	 margin-left:10%;
 	 height:100%;
@@ -18,14 +18,11 @@ body{
 	      }	
 	
 #menu{
-	  display:;
 	  margin-top:40px;
 	  margin-left:5px;
 	  margin:5%;
 	  width:170px;
 	  border:#FFFFFF;
-	  border-style:;
-	  boeder:;
 	  float:left;
 	  font-family:concielan;
 	 }	   
@@ -36,10 +33,6 @@ body{
 	  border:2px;
 	  margin-top:95px;	
 	 }
-	 
-p{
-  color:#FFFFFF;	
- }
  
 a{
   font-size:xx-large;
