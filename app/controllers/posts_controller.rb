@@ -2,11 +2,15 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    if admin?
+      @posts = Post.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @posts }
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render :json => @posts }
+      end
+    else
+      redirect_to "/"
     end
   end
 
@@ -24,11 +28,15 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.json
   def new
-    @post = Post.new
+    if admin?
+      @post = Post.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render :json => @post }
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render :json => @post }
+      end
+    else
+      redirect_to "/"
     end
   end
 
@@ -40,7 +48,20 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(params[:post])
+    timestamp = Time.now.utc.iso8601.gsub(/\W/, '')
+    filename = params[:upload]['datafile'].original_filename
+    puts filename
+    puts params[:post][:title]
+    
+    @post = Post.new(
+      :title => params[:post][:title], 
+      :content => params[:post][:content], 
+      :post_type => params[:post][:post_type], 
+      :file => timestamp + "_" + filename,
+      :active => params[:post][:active]
+    )
+
+    data_file = DataFile.save(params[:upload], timestamp)
 
     respond_to do |format|
       if @post.save
@@ -80,4 +101,32 @@ class PostsController < ApplicationController
       format.json { head :ok }
     end
   end
+  def sanitize_filename(file_name)
+    # get only the filename, not the whole path (from IE)
+    just_filename = File.basename(file_name) 
+    # replace all none alphanumeric, underscore or perioids
+    # with underscore
+    just_filename.sub(/[^\w\.\-]/,'_') 
+  end
+end
+
+
+class DataFile < ActiveRecord::Base
+  def self.save(upload, timestamp)
+    name =  sanitize_filename(upload['datafile'].original_filename)
+    directory = "public/data"
+    # create the file path
+    path = File.join(directory, timestamp + "_" + name)
+    # write the file
+    File.open(path, "wb") { |f| f.write(upload['datafile'].read) }
+  end
+  
+  def self.sanitize_filename(file_name)
+    # get only the filename, not the whole path (from IE)
+    just_filename = File.basename(file_name) 
+    # replace all none alphanumeric, underscore or perioids
+    # with underscore
+    just_filename.sub(/[^\w\.\-]/,'_') 
+  end
+  
 end

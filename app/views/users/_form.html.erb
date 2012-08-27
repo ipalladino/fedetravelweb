@@ -28,8 +28,10 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :active %><br />
-    <%= f.check_box :active %>
+      <% if @isadmin  %>
+      <%= f.label :active %>
+      <%= f.check_box :active %>
+      <% end %>
   </div>
   <div class="actions">
     <%= f.submit %>

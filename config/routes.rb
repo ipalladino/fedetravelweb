@@ -1,7 +1,15 @@
 Travelweb::Application.routes.draw do
+  get "pages/new"
+  get "pages/login"
+  get "pages/home"
+  get "pages/home_admin"
+  
+  match "sessions/destroy" => "sessions#destroy"
+  
+  match "/" => "pages#index"
   resources :users
-
   resources :posts
+  resources :sessions
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

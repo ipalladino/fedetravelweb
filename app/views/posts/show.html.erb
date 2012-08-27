@@ -12,12 +12,14 @@
 
 <p>
   <b>Type:</b>
-  <%= @post.type %>
+  <%= @post.post_type %>
 </p>
 
 <p>
   <b>File:</b>
-  <%= @post.file %>
+  <% if @post.post_type == "image" %>
+      <img src='/data/<%= @post.file %>' />
+  <% end %>
 </p>
 
 <p>

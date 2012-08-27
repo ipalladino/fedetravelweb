@@ -10,12 +10,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120815021621) do
+ActiveRecord::Schema.define(:version => 20120817051123) do
 
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "content"
-    t.string   "type"
+    t.string   "post_type"
     t.string   "file"
     t.boolean  "active"
     t.datetime "created_at"

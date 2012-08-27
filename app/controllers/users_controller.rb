@@ -2,11 +2,15 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if(!admin?) 
+      redirect_to "/"
+    else
+      @users = User.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @users }
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render :json => @users }
+      end
     end
   end
 
@@ -34,7 +38,12 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    if admin?
+      @isadmin = admin?
+      @user = User.find(params[:id])
+    else
+      redirect_to "/"
+    end
   end
 
   # POST /users
