@@ -1,20 +1,19 @@
 <div id="container">
-	
-   <h1>WELCOME!</h1>
-   
-   <a href="/users/new"><h3>First time visitors register here!</h3></a>
-
-	<%= form_tag("/sessions", :method => "post", :multipart => true) do %>
-   	<label>Email</label>
-		<input type="text" name="email" id="email" />
+ 	
+    <h1 id="welcome">WELCOME!</h1>
+    
+    <a id="registrationlink" href="registration.html"><h3>First time visitors register here!</h3></a>
+ 
+ 	<%= form_tag("/sessions", :method => "post", :multipart => true) do %>
+    	<label>Email</label><br/>
+		<input type="text" name="email" id="email" class="blurry"/>
 		<br/>
-   
-   	<label>Password</label>
-		<%= password_field_tag :password %>
+    
+    	<label>Password</label>
+		<%= password_field_tag :password, '', :class => 'blurry' %>
 		<br/> 
         <%= submit_tag "Login" %>
         <%= hidden_field_tag 'previous_page', @link %>
-   <% end %>
-   
- 		
-</div>
+     <% end %>
+  		
+ </div>

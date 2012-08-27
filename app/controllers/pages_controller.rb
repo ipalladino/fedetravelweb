@@ -12,10 +12,15 @@ class PagesController < ApplicationController
   end
   
   def home
-    
+    @posts = Post.find(:all, :limit => 10)
+  end
+  
+  def pics
+    @posts = Post.where(:post_type => "image")
   end
   
   def home_admin
+    @posts = Post.find(:all, :limit => 10)
   end
   
   def login

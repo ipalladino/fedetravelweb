@@ -18,9 +18,13 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
-
+    
     respond_to do |format|
-      format.html # show.html.erb
+      if(user?) 
+        format.html {render :template => 'posts/show_guest'}
+      elsif(admin?)
+        format.html {render :template => 'posts/show'}
+      end
       format.json { render :json => @post }
     end
   end

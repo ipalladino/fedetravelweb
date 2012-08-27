@@ -1,36 +1,28 @@
-<div id="container">
-
+<div id="container1">
+    <div style="position:absolute" id="signout"><%= link_to "Sign out", :controller => "sessions", :action => "destroy", :method=>:delete %></div>   
     <div id="menu">
     
- 		<a href=""><p>HOME</p></a>
-        <a href="pic.php"><p>PICS</p></a>
-        <a href=""><p>MOVIES</p></a>
-        <a href=""><p>MAP</p></a>
-        <a href=""><P>POETRY</P></a>
+ 		<a href="/" ><p>HOME</p></a>
+        <a href="/pages/pics" ><p>PICS</p></a>
+        <a href="" ><p>MOVIES</p></a>
+        <a href="" ><p>MAP</p></a>
+        <a href="" ><P>POETRY</P></a>
     
     </div>
     
     <div id="main">
-    
-    	<div>
-        	<form action="" method="" name="" id="">
-            <input type="" name="" id="" />
-            <button type="browse">Browse</button>
-            <button type="">Upload</button>
-            </form>
-        </div>
-    
-        <div class="pic">
-            <p>Mentitum verterem expetendis et sed. Nam cetero electram reprimique ei, eum wisi elaboraret at. Nec ei aperiam detracto                persequeris, quem veritus nec at. Facete abhorreant est ea.
-               Vix te stet delicata urbanitas, audiam propriae voluptua ex mea, vix no animal scribentur. Id his detracto fabellas, nam ancillae               deseruisse ut. Ne munere adipisci nam. Virtute fuisset sensibus mea cu.
-               Semper aliquam interesset his eu, etiam simul vim an. Ad ridens quodsi legimus nam, at mei hinc iuvaret. Cu essent omittam nec, pri               in alia conclusionemque. Brute ludus ex mea, viderer tractatos persequeris ei his. Suas dicam dolorum ut sea, brute nostro te vis.
-               Ne sea altera tamquam, suas imperdiet an usu, mea ad malorum rationibus. Ut maiorum omittantur eos. Ea novum scripta alienum est,               nostro tibique quo at. Vim ex unum quando ancillae, eum justo noster deserunt no. Scaevola partiendo intellegam eu vim.
-               Usu vero dolorum complectitur ad, eos choro discere ex. At eam sale nostro principes. Ea iusto 
-            </p>
-        </div>
+        <div><a href="/posts/new">New Post</a></div>
+        <% @posts.each do |post| %>
+            <div class="pic">
+            <h1><%= post.title %></h1>
+            <% if post.post_type == "image" %>
+                  <img src='/data/<%= post.file %>' />
+            <% end %>
+            <p><%= post.content %></p>
+            <p><%= link_to 'Show', post %></p>
+            <p class="created_at"><%= post.created_at %></p>
+            </div>
+        <% end %>
     </div>
     
 </div>
-
-<%= link_to "Sign out", :controller => "sessions", :action => "destroy", :method=>:delete %>
-

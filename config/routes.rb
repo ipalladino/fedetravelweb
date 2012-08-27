@@ -3,6 +3,7 @@ Travelweb::Application.routes.draw do
   get "pages/login"
   get "pages/home"
   get "pages/home_admin"
+  get "pages/pics"
   
   match "sessions/destroy" => "sessions#destroy"
   
