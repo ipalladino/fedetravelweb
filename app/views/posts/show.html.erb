@@ -1,32 +1,25 @@
-<p id="notice"><%= notice %></p>
+<div id="container1">
+    <%= make_menu %>
 
-<p>
-  <b>Title:</b>
-  <%= @post.title %>
-</p>
-
-<p>
-  <b>Content:</b>
-  <%= @post.content %>
-</p>
-
-<p>
-  <b>Type:</b>
-  <%= @post.post_type %>
-</p>
-
-<p>
-  <b>File:</b>
-  <% if @post.post_type == "image" %>
-      <img src='/data/<%= @post.file %>' />
-  <% end %>
-</p>
-
-<p>
-  <b>Active:</b>
-  <%= @post.active %>
-</p>
-
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+    <div id="menu">
+    
+ 		<a href="/" ><p>HOME</p></a>
+        <a href="/pages/pics" ><p>PICS</p></a>
+        <a href="" ><p>MOVIES</p></a>
+        <a href="" ><p>MAP</p></a>
+        <a href="" ><P>POETRY</P></a>
+    
+    </div>
+    
+    <div id="main">
+            <div class="pic">
+            <h1><%= @post.title %></h1>
+            <% if @post.post_type == "image" %>
+                  <img src='/data/<%= @post.file %>' />
+            <% end %>
+            <p><%= @post.content %></p>
+            <p class="created_at"><%= @post.created_at %></p>
+			<%= link_to 'Edit', edit_post_path(@post) %>
+            </div>
+    </div>
+</div>

@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     if admin?
-      @posts = Post.all
+      @posts = Post.find(:all, :order => "created_at DESC")
 
       respond_to do |format|
         format.html # index.html.erb
@@ -53,14 +53,14 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     timestamp = Time.now.utc.iso8601.gsub(/\W/, '')
-    filename = params[:upload]['datafile'].original_filename
+    filename = sanitize_filename(params[:upload]['datafile'].original_filename)
     puts filename
     puts params[:post][:title]
     
     @post = Post.new(
       :title => params[:post][:title], 
       :content => params[:post][:content], 
-      :post_type => params[:post][:post_type], 
+      :post_type => params[:post_type], 
       :file => timestamp + "_" + filename,
       :active => params[:post][:active]
     )

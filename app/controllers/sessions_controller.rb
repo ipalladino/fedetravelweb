@@ -3,12 +3,16 @@ class SessionsController < ApplicationController
   end
   
   def create
-    session[:password] = params[:password]
-    flash[:notice] = "Successfully logged in"
-    if(params[:previous_page] != nil && params[:previous_page] != "")
-      redirect_to "/" + params[:previous_page]
-    else
+    if(User.find_by_email(params[:email]) == nil)
       redirect_to "/"
+    else
+      session[:password] = params[:password]
+      flash[:notice] = "Successfully logged in"
+      if(params[:previous_page] != nil && params[:previous_page] != "")
+        redirect_to "/" + params[:previous_page]
+      else
+        redirect_to "/"
+      end
     end
   end
   

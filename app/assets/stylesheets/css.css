@@ -12,6 +12,9 @@
 		   src:url(/coolvetica/coolvetica%20rg.ttf);
 	      }
 
+button {
+    width:200px !important;
+}
 
 body{
 	background: url(/backgound.jpg); 
@@ -22,10 +25,13 @@ body{
 	 margin-left:10%;
 	 color:#ffffff;
 	 font-weight:lighter;
+	 font-size:120%;
 }
  
 img {
-    width: 500px;
+    max-width: 500px;
+    max-height: 400px;
+    border:1px solid #ffffff;
 }
  
 #container{
@@ -35,7 +41,11 @@ img {
            width:20%;
 	       margin-top:10%;
 		   font-family:concielan;
-	      }
+}
+
+#container1 {
+	       
+}
  
 #form{
 	  width:150px;
@@ -67,12 +77,7 @@ img {
 	 }
  
 	
-/* home */
-	
-
-container1 {
-	       margin-top:-6%;
-}	
+/* home */	
 	
 #menu{
 	  margin-top:40px;
@@ -98,13 +103,25 @@ a, a:visited {
     font-size:11px;
 }
 
+#admin-container {
+    margin-top:40px;
+}
+
 		   
 #main{
-      padding:5px;
+      padding:30px;
 	  border-color:#CCC;
 	  border:2px;
 	  float:left;
 	  width:600px;
+	  background:rgba(204,204,204, 0.4);
+	  border-radius:10px;
+	  margin-top:60px;
+}
+
+#nav-top {
+    background:rgba(204,204,204, 0.4) !important;
+    padding:0.5em;
 }
 		
 	
@@ -112,6 +129,10 @@ a, a:visited {
 
 table{
 	margin-top:20px;
+}
+
+h1{
+    text-decoration:underline;
 }
  
 td{

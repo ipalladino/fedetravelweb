@@ -1,5 +1,5 @@
 <div id="container1">
-    <div style="position:absolute" id="signout"><%= link_to "Sign out", :controller => "sessions", :action => "destroy", :method=>:delete %></div>   
+    <%= make_menu %>   
     <div id="menu">
     
  		<a href="/" ><p>HOME</p></a>
@@ -14,11 +14,11 @@
         <% @posts.each do |post| %>
             <div class="pic">
             <h1><%= post.title %></h1>
+			
             <% if post.post_type == "image" %>
                   <img src='/data/<%= post.file %>' />
             <% end %>
             <p><%= post.content %></p>
-            <p><%= link_to 'Show', post %></p>
             <p class="created_at"><%= post.created_at %></p>
             </div>
         <% end %>

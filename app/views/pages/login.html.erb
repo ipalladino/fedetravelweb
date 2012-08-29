@@ -1,4 +1,4 @@
-<div id="container">
+<div id="container" style="width:400px">
  	
     <h1 id="welcome">WELCOME!</h1>
     
@@ -9,11 +9,11 @@
 		<input type="text" name="email" id="email" class="blurry"/>
 		<br/>
     
-    	<label>Password</label>
+    	<label>Password</label></br/>
 		<%= password_field_tag :password, '', :class => 'blurry' %>
 		<br/> 
         <%= submit_tag "Login" %>
         <%= hidden_field_tag 'previous_page', @link %>
      <% end %>
-  		
+  	 <p id="notice"><%= notice %></p>	
  </div>
