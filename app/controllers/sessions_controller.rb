@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       redirect_to "/"
     else
       amount = user[:login_amount]
-      amount = amount + 1
+      amount = Integer(amount) + 1
       user.update_attributes(:login_amount => amount)
       session[:password] = params[:password]
       flash[:notice] = "Successfully logged in"
