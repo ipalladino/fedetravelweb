@@ -1,0 +1,16 @@
+<div class="pic">
+<h1><%= @post.title %></h1>
+<% if @post.post_type == "image" %>
+      <img src='<%= @post.file %>' />
+<% elsif @post.post_type == "video" %>
+	  <video style="max-width:500px" controls="controls">
+	  	<source src="<%= @post.file %>" type="video/mp4" />
+	  	Your browser does not support the video tag.
+	  </video>
+<% end %>
+<p><%= @post.content %></p>
+<p class="created_at"><%= @post.created_at %></p>
+<% if @isAdmin %>
+	<%= link_to 'Edit', edit_post_path(@post) %>
+<% end %>
+</div>
