@@ -10,4 +10,12 @@ module ApplicationHelper
       render(:inline => html)
     end
   end
+  def showPost
+    @isAdmin = admin?
+    render '/posts/single_item'
+  end
+  
+  def make_menu_page
+    render '/layouts/menu'
+  end
 end

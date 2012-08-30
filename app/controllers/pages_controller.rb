@@ -12,15 +12,25 @@ class PagesController < ApplicationController
   end
   
   def home
-    @posts = Post.find(:all, :order => "created_at DESC", :limit => 10)
+    @posts = Post.where(:post_type => "image").order("created_at DESC").limit(10)
   end
   
   def pics
     @posts = Post.where(:post_type => "image").order("created_at DESC")
   end
   
+  def videos
+    @posts = Post.where(:post_type => "video").order("created_at DESC")
+    render 'home'
+  end
+  
+  def poetry
+    @posts = Post.where(:post_type => "poetry").order("created_at DESC")
+    render 'home'
+  end
+  
   def home_admin
-    @posts = Post.find(:all, :order => "created_at DESC", :limit => 10)
+    @posts = Post.where(:post_type => "image").order("created_at DESC").limit(10)
   end
   
   def login

@@ -1,27 +1,11 @@
 <div id="container1">
     <%= make_menu %>
-    <div id="menu">
-    
- 		<a href="/" ><p>HOME</p></a>
-        <a href="/pages/pics" ><p>PICS</p></a>
-        <a href="" ><p>MOVIES</p></a>
-        <a href="" ><p>MAP</p></a>
-        <a href="" ><P>POETRY</P></a>
-    
-    </div>
+    <%= make_menu_page %>
     
     <div id="main">
         <% @posts.each do |post| %>
-            <div class="pic">
-            <h1><%= post.title %></h1>
-            <% if post.post_type == "image" %>
-				<%= link_to(post) do %>
-                  <img src='/data/<%= post.file %>' />
-				<% end %>
-            <% end %>
-            <p><%= post.content %></p>
-            <p class="created_at"><%= post.created_at %></p>
-            </div>
+			<% @post = post%>
+            <%= showPost %>
         <% end %>
     </div>
     

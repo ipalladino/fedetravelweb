@@ -49,6 +49,8 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    init_amout = {:login_amount => 0, :active => true}
+    params[:user] = params[:user].merge(init_amout)
     @user = User.new(params[:user])
     if @user.save
       redirect_to "/pages/login", :notice => 'User created successfully'

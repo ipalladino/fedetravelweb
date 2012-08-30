@@ -3,9 +3,14 @@ class SessionsController < ApplicationController
   end
   
   def create
-    if(User.find_by_email(params[:email]) == nil)
+    user = User.find_by_email(params[:email])
+    
+    if(user == nil)
       redirect_to "/"
     else
+      amount = user[:login_amount]
+      amount = amount + 1
+      user.update_attributes(:login_amount => amount)
       session[:password] = params[:password]
       flash[:notice] = "Successfully logged in"
       if(params[:previous_page] != nil && params[:previous_page] != "")

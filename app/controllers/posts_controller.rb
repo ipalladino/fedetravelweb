@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  @@BUCKET = "travelweb-assets"
   # GET /posts
   # GET /posts.json
   def index
@@ -53,19 +54,25 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     timestamp = Time.now.utc.iso8601.gsub(/\W/, '')
-    filename = sanitize_filename(params[:upload]['datafile'].original_filename)
-    puts filename
-    puts params[:post][:title]
+    puts "Post title:" + params[:post][:title]
+    if(params[:post_type] != "poetry")
+      filename = timestamp + "_" + sanitize_filename(params[:upload]['datafile'].original_filename)
+      puts "Saving" + filename
+      AWS::S3::S3Object.store(filename, params[:upload]['datafile'].read, @@BUCKET, :access => :public_read)
+      url = AWS::S3::S3Object.url_for(filename, @@BUCKET, :authenticated => false)
+    else
+      url = ''
+    end
     
     @post = Post.new(
       :title => params[:post][:title], 
       :content => params[:post][:content], 
       :post_type => params[:post_type], 
-      :file => timestamp + "_" + filename,
+      :file => url,
       :active => params[:post][:active]
     )
-
-    data_file = DataFile.save(params[:upload], timestamp)
+    
+    #data_file = DataFile.save(params[:upload], timestamp)
 
     respond_to do |format|
       if @post.save
@@ -77,7 +84,7 @@ class PostsController < ApplicationController
       end
     end
   end
-
+  
   # PUT /posts/1
   # PUT /posts/1.json
   def update
@@ -98,8 +105,9 @@ class PostsController < ApplicationController
   # DELETE /posts/1.json
   def destroy
     @post = Post.find(params[:id])
+    filename = File.basename(@post.file)
     @post.destroy
-
+    AWS::S3::S3Object.delete(filename, @@BUCKET)
     respond_to do |format|
       format.html { redirect_to posts_url }
       format.json { head :ok }
@@ -112,25 +120,4 @@ class PostsController < ApplicationController
     # with underscore
     just_filename.sub(/[^\w\.\-]/,'_') 
   end
-end
-
-
-class DataFile < ActiveRecord::Base
-  def self.save(upload, timestamp)
-    name =  sanitize_filename(upload['datafile'].original_filename)
-    directory = "public/data"
-    # create the file path
-    path = File.join(directory, timestamp + "_" + name)
-    # write the file
-    File.open(path, "wb") { |f| f.write(upload['datafile'].read) }
-  end
-  
-  def self.sanitize_filename(file_name)
-    # get only the filename, not the whole path (from IE)
-    just_filename = File.basename(file_name) 
-    # replace all none alphanumeric, underscore or perioids
-    # with underscore
-    just_filename.sub(/[^\w\.\-]/,'_') 
-  end
-  
 end
