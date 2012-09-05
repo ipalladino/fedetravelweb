@@ -14,11 +14,11 @@
 	  <p><%= @post.content %></p>
 <% elsif @post.post_type == "video" %>
 	  <h1><%= @post.title %></h1>
- 	  <div id="post-content"><p><%= @post.content %></p></div>
 	  <video style="max-width:500px" controls="controls">
 	  	<source src="<%= @post.file %>" type="video/mp4" />
 	  	Your browser does not support the video tag.
 	  </video>
+	  <p><%= @post.content %></p>	
 <% elsif @post.post_type == "poetry" %>
 	<div id="poetry-title"><h1><%= @post.title %></h1></div>
 	<div id="post-content"><p><%= @post.content %></p></div>
