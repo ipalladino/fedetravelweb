@@ -5,6 +5,7 @@ Travelweb::Application.routes.draw do
   get "pages/pics"
   get "pages/videos"
   get "pages/poetry"
+  get "pages/maps"
   
   match "sessions/destroy" => "sessions#destroy"
   

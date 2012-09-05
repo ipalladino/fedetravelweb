@@ -1,16 +1,33 @@
+<% if @post.post_type != "poetry" %>
 <div class="pic">
-<h1><%= @post.title %></h1>
-<% if @post.post_type == "image" %>
-      <img src='<%= @post.file %>' />
+<% else %>
+	<% if((@counter % 2) == 0) %>
+		<div class="poetry-right">
+	<% else %>
+		<div class="poetry-left">
+	<% end%>
+<% end %>
+<% if @post.post_type == "image" || @post.post_type == "map" %>
+	  <!-- div id="post-title"><h1><%= @post.title %></h1></div -->
+	  <h1><%= @post.title %></h1>	
+	  <img src='<%= @post.file %>' />
+	  <p><%= @post.content %></p>
 <% elsif @post.post_type == "video" %>
+	  <h1><%= @post.title %></h1>
+ 	  <div id="post-content"><p><%= @post.content %></p></div>
 	  <video style="max-width:500px" controls="controls">
 	  	<source src="<%= @post.file %>" type="video/mp4" />
 	  	Your browser does not support the video tag.
 	  </video>
+<% elsif @post.post_type == "poetry" %>
+	<div id="poetry-title"><h1><%= @post.title %></h1></div>
+	<div id="post-content"><p><%= @post.content %></p></div>
 <% end %>
-<p><%= @post.content %></p>
-<p class="created_at"><%= @post.created_at %></p>
-<% if @isAdmin %>
-	<%= link_to 'Edit', edit_post_path(@post) %>
+<% if @post.post_type != "poetry" %>
+	<p class="created_at"><%= @post.created_at %></p>
+	<% if @isAdmin %>
+		<%= link_to 'Edit', edit_post_path(@post) %>
+	<% end %>
 <% end %>
 </div>
+<div style="clear:both"> </div>

@@ -3,9 +3,11 @@
     <%= make_menu_page %>
     
     <div id="main">
-        <% @posts.each do |post| %>			
+		<% counter = 0 %>
+        <% @posts.each do |post| %>
+			<% counter = counter + 1 %>
             <% @post = post%>
-            <%= showPost %>
+            <%= showPost(counter) %>
         <% end %>
     </div>
     

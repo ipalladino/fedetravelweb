@@ -1,15 +1,15 @@
-<div id="container" style="width:400px">
+<div id="container_login" style="width:400px">
  	
     <h1 id="welcome">WELCOME!</h1>
     
     <a id="registrationlink" href="/users/new"><h3>First time visitors register here!</h3></a>
  
  	<%= form_tag("/sessions", :method => "post", :multipart => true) do %>
-    	<label>Email</label><br/>
+    	<div class="label_login">Email</div>
 		<input type="text" name="email" id="email" class="blurry"/>
 		<br/>
     
-    	<label>Password</label></br/>
+    	<div class="label_login">Password</div>
 		<%= password_field_tag :password, '', :class => 'blurry' %>
 		<br/> 
         <%= submit_tag "Login" %>

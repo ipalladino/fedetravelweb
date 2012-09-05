@@ -18,14 +18,14 @@ button {
 
 body{
 	background: url(/backgound.jpg); 
-	font-family:helvetica;
+	font-family:coolvetica;
 	 background-repeat:no-repeat;
 	 background-color:#000000;
 	 width:100%;
 	 margin-left:10%;
 	 color:#ffffff;
 	 font-weight:lighter;
-	 font-size:120%;
+	 font-size:100%;
 }
  
 img {
@@ -40,6 +40,16 @@ img {
            margin-right:auto;
            width:20%;
 	       margin-top:10%;
+		   font-family:concielan;		   
+}
+
+
+#container_login{
+	       display:block;
+	       margin-left:auto;
+           margin-right:auto;
+           width:20%;
+	       margin-top:40%;
 		   font-family:concielan;
 }
 
@@ -58,10 +68,16 @@ img {
 	  margin-top:30px;
 	  background:trasparent;
 	 }
+	 
+div.label_login {
+    min-width: 132px;
+    float: left;
+}
 
 .blurry{
-	  opacity:0.8;
-      filter:alpha(opacity=1);
+        border: 2px solid blue;
+        background: transparent;
+        color:white;
 }
 	 
 #registrationlink{
@@ -116,25 +132,33 @@ a, a:visited {
 		   
 #main{
       padding:30px;
-	  border-color:#CCC;
-	  border:2px;
 	  float:left;
-	  width:600px;
-	  background:rgba(204,204,204, 0.4);
-	  border-radius:10px;
+	  width:700px;
+	  /* background:rgba(204,204,204, 0.4); 
+	  border-color:#CCC;
+  	  border:2px;
+	  border-radius:10px; */
 	  margin-top:60px;
 }
 
 #nav-top {
     background:rgba(204,204,204, 0.4) !important;
     padding:0.5em;
+    margin-left: 10%;
 }
-		
+
+a, a:visited{
+   text-decoration:none;
+   font-family:concielan;
+   color:orange;
+}		
 	
 /* pics gallery */
 
 h1{
-    text-decoration:underline;
+    font-family:concielan;
+    color:orange;
+    text-shadow: 2px 2px #000000;
 }
  
 .pic_list {
@@ -213,4 +237,36 @@ tfoot td { background:#5C443A;
 tbody tr:hover { background:#99BCBF;
  border:1px solid #03476F;
  color:#000000;
+}
+
+.poetry-right #poetry-title {
+    float:left;
+    width:180px;
+}
+
+.poetry-right #post-content {
+    float:left;
+    width:520px;
+}
+
+.poetry-left #poetry-title {
+    float:right;
+    width:150px;
+}
+
+.poetry-left #post-content {
+    float:left;
+    width:537px;
+}
+
+#post-title {
+    float:left;
+}
+
+#post-content {
+    float:left;
+}
+
+#post-image {
+    float:left;
 }

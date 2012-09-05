@@ -10,8 +10,9 @@ module ApplicationHelper
       render(:inline => html)
     end
   end
-  def showPost
+  def showPost(counter = 0)
     @isAdmin = admin?
+    @counter = counter
     render '/posts/single_item'
   end
   

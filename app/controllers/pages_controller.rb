@@ -24,6 +24,11 @@ class PagesController < ApplicationController
     render 'home'
   end
   
+  def maps
+    @posts = Post.where(:post_type => "map").order("created_at DESC")
+    render 'home'
+  end
+  
   def poetry
     @posts = Post.where(:post_type => "poetry").order("created_at DESC")
     render 'home'

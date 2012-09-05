@@ -21,11 +21,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     
     respond_to do |format|
-      if(user?) 
-        format.html {render :template => 'posts/show_guest'}
-      elsif(admin?)
-        format.html {render :template => 'posts/show'}
-      end
+      format.html
       format.json { render :json => @post }
     end
   end
@@ -106,8 +102,10 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     filename = File.basename(@post.file)
+    if(@post.post_type != "poetry")
+      AWS::S3::S3Object.delete(filename, @@BUCKET)
+    end
     @post.destroy
-    AWS::S3::S3Object.delete(filename, @@BUCKET)
     respond_to do |format|
       format.html { redirect_to posts_url }
       format.json { head :ok }
