@@ -1,0 +1,27 @@
+<div class="pic">
+<table style="width:100%"><tr><td>
+	<div class="col1">
+		<h1><%= @post.title %></h1>	
+		<p><%= @post.content %></p>
+	</div>
+</td><td>
+	<div class="col2">
+		<% if @post.post_type == "image" || @post.post_type == "map" %>
+		<img src='<%= @post.file %>' />
+		<% elsif @post.post_type == "video" %>
+		<video style="max-width:500px" controls="controls">
+		  	<source src="<%= @post.file %>" type="video/mp4" />
+		  	Your browser does not support the video tag.
+		  </video>
+		<% end %>
+	</div>
+</td></tr></table>
+	<div style="clear:both"> </div>
+	<div class="element_footer">
+		<p><%= @post.created_at %></p>
+		<% if @isAdmin %>
+			<%= link_to 'Edit', edit_post_path(@post) %>
+		<% end %>
+	</div>
+</div>
+<div style="clear:both"> </div>
