@@ -4,10 +4,10 @@ class ApplicationController < ActionController::Base
   helper_method :user?
   
   def admin?
-      session[:password] == 'admin'
+      session[:password] == 'andrew_admin'
   end
   
   def user?
-      session[:password] == 'freewill'
+      session[:password] == 'register'
   end
 end
