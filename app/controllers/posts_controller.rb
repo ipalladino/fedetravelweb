@@ -85,7 +85,19 @@ class PostsController < ApplicationController
   # PUT /posts/1.json
   def update
     @post = Post.find(params[:id])
-
+    timestamp = Time.now.utc.iso8601.gsub(/\W/, '')
+    if(params[:post_type] != "poetry")
+      if(!params[:upload].empty?)
+        filename = File.basename(@post.file)
+        AWS::S3::S3Object.delete(filename, @@BUCKET)
+        filename = timestamp + "_" + sanitize_filename(params[:upload]['datafile'].original_filename)
+        puts "Saving" + filename
+        AWS::S3::S3Object.store(filename, params[:upload]['datafile'].read, @@BUCKET, :access => :public_read)
+        url = AWS::S3::S3Object.url_for(filename, @@BUCKET, :authenticated => false)
+        @post.file = url
+      end
+    end
+    
     respond_to do |format|
       if @post.update_attributes(params[:post])
         format.html { redirect_to @post, :notice => 'Post was successfully updated.' }

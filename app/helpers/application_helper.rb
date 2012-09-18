@@ -2,7 +2,7 @@ module ApplicationHelper
   def make_menu
     if(admin?)
       link = link_to 'Sign out', :controller => 'sessions', :action => 'destroy', :method=>:delete
-      html = "<div id='nav-top'>" + link + "  |  <a href='/posts/new'>New Post</a>  |  <a href='/users/'>Users</a>  |  <a href='/posts'>Posts</a></div>"
+      html = "<div id='nav-top'>" + link + "  |  <a href='/posts/new'>New Post</a>  |  <a href='/users/'>Users</a>  |  <a href='/posts'>Posts</a> | <a href='/'>Start</a></div>"
       render(:inline => html)
     elsif(user?)
       link = link_to 'Sign out', :controller => 'sessions', :action => 'destroy', :method=>:delete

@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   end
   
   def user?
-    session[:password] == 'freewill'
+      session[:password] == 'freewill'
   end
 end

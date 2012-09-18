@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
   
   def create
-    user = User.find_by_email(params[:email])
+    user = User.find_by_email(params[:email].downcase)
     
     if(user == nil)
       redirect_to "/"
@@ -19,6 +19,10 @@ class SessionsController < ApplicationController
         redirect_to "/"
       end
     end
+  end
+  
+  def self.find_by_email(email)
+    User.find(:all, :conditions => ["email = lower(?)", email]) 
   end
   
   def destroy

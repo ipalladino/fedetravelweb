@@ -44,8 +44,9 @@ img {
 h1,h2 {
     font-family:concielan;
     color:#ff9900;
-    text-shadow: 0.1em 0.1em #333
+    text-shadow:9px 7px #333;
 }
+
 h3 {
     font-family:helvetica;
 }
@@ -56,7 +57,7 @@ h3 {
 
 a,a:visited {
     font-family:concielan;
-    color:#ffffff;
+    color:#cccccc;
     text-decoration:none;
 }
 a:hover {
@@ -69,7 +70,7 @@ a:hover {
     height:100%;
     font-size:1.2em;
     min-width:132px;
-    text-shadow: 0.1em 0.1em #333
+    text-shadow: 7px 7px #333;
 }
 #main {
     width:85%;
@@ -100,13 +101,14 @@ a:hover {
 }
 
 #container_login {
+    color:#bbbbbb;
     position:fixed;
     bottom:0px;
     width:100%; //width should be 100%
 }
 
 .blurry{
-        border: 2px solid blue;
+        border: 1px solid blue;
         background: transparent;
         color:white;
         width:250px;
@@ -225,4 +227,22 @@ a:hover {
 }
 #form_scaffold div {
     float:none;
+}
+
+
+/* LOGIN PAGE STYLES */
+#registrationlink {
+    
+}
+#login_child a  {
+    color:#bbbbbb;
+    font-family:concielan;
+}
+#login_child a:hover {
+    color:#ff9900;
+}
+
+#welcome {
+    color: #bbbbbb;
+    font-family:concielan;
 }
