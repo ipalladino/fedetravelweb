@@ -7,8 +7,8 @@ gem 'rails', '3.1.1'
 
 
 gem 'json'
-gem 'sqlite3', '1.3.5'
-#gem 'pg' 
+#gem 'sqlite3', '1.3.5'
+gem 'pg' 
 gem 'aws-s3', '0.6.2', :require => 'aws/s3'
 
 
