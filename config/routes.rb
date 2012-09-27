@@ -1,4 +1,6 @@
 Travelweb::Application.routes.draw do
+  get "map_location/new"
+
   get "pages/login"
   get "pages/home"
   get "pages/home_admin"
@@ -6,6 +8,8 @@ Travelweb::Application.routes.draw do
   get "pages/videos"
   get "pages/poetry"
   get "pages/maps"
+  get "map_location/list"
+  get "map_location/manage"
   
   match "sessions/destroy" => "sessions#destroy"
   
@@ -13,6 +17,7 @@ Travelweb::Application.routes.draw do
   resources :users
   resources :posts
   resources :sessions
+  resources :map_location
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

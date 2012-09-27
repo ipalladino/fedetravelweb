@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120830071723) do
+ActiveRecord::Schema.define(:version => 20120927081202) do
+
+  create_table "map_locations", :force => true do |t|
+    t.string   "xval"
+    t.string   "yval"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+    t.text     "content"
+  end
 
   create_table "posts", :force => true do |t|
     t.string   "title"

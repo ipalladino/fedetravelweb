@@ -1,0 +1,145 @@
+<div style="float:left; margin-left:20px; width:260px;">
+	<label>Address: </label>
+	<input id="address"  type="text"/> <br/>
+	<button onclick="getLocation()" >First Step - Load marker using address</button><br/>
+	<label>Title: </label><br/>
+	<input id="title"/><br/>
+	<label>Content: </label><br/>
+	<textarea id="content"> </textarea> <br/>
+	<button onclick="saveMarker()">Second Step - Save current marker and data </button>
+	<div style="float:none"><h2 id="the_title"></h2></div>
+	<div id="the_content" style="float:none"></div>
+</div>
+
+<div id="map_canvas" style="width:450px; height:300px;float:left;margin-left:20px"></div><br/>
+
+	
+<script type="text/javascript" charset="utf-8">
+	var geocoder;
+	var map;
+	var marker;
+	var markers = [];
+	var coordinatesList = [];
+	
+	var csrf_token = '<%= form_authenticity_token.to_s %>';
+	$("body").bind("ajaxSend", function(elm, xhr, s){
+	   if (s.type == "POST") {
+	      xhr.setRequestHeader('X-CSRF-Token', csrf_token);
+	   }
+	});
+	
+		function updateLocations() {
+			coordinatesList = [];
+			$.ajax({
+				url:"/map_location/list",
+				type:"GET",
+				success:function(result){
+					console.log(result);
+					var latlngbounds = new google.maps.LatLngBounds();
+					
+					for(var i = 0; i < result.length; i++){
+						coordinatesList.push(new google.maps.LatLng(result[i].xval,result[i].yval));
+						latlngbounds.extend(coordinatesList[i]);
+						var marker = new google.maps.Marker({
+							map: map,
+							position : coordinatesList[i],
+							title: result[i].title
+						});
+						markers.push(marker);
+					}
+					
+					$("#the_title").html(result[result.length-1].title);
+					$("#the_content").html(result[result.length-1].content);
+					
+					var coordinatesPath = new google.maps.Polyline({
+					    path: coordinatesList,
+					    strokeColor: "#FF0000",
+					    strokeOpacity: 1.0,
+					    strokeWeight: 2
+					  });
+					
+					coordinatesPath.setMap(map);
+						
+					map.setCenter(latlngbounds.getCenter());
+					map.fitBounds(latlngbounds);
+
+				},
+				error:function(result) {
+					console.log(result);
+				}
+			});
+		}
+		
+		function saveMarker() {
+			var pos = marker.getPosition();
+			var data = {
+				"xval": pos.Xa,
+				"yval": pos.Ya,
+				"title" : $("#title").val(),
+				"content" : $("#content").val()
+			}
+			
+			$.ajax({
+				data: data,
+				url:"/map_location",
+				type:"POST",
+				success:function(result){
+					console.log(result);
+					window.updateLocations();
+				},
+				error:function(result) {
+					console.log(result);
+				}
+			});
+			
+		}
+
+		function initialize(){
+			//MAP
+			var latlng = new google.maps.LatLng(41.659,-4.714);
+			var options = {
+				zoom: 16,
+				center: latlng,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+
+			map = new google.maps.Map(document.getElementById("map_canvas"), options);
+			//GEOCODER
+			geocoder = new google.maps.Geocoder();
+			updateLocations();
+		}
+
+		$(document).ready(function() {
+		  initialize();
+		})
+
+		function getLocation() {
+			console.log($("#address").val());
+
+			var location = $("#address").val();
+			if(!geocoder) {
+				geocoder = new google.maps.Geocoder();	
+			}
+
+			var geocoderRequest = {
+				address: location
+			}
+
+			geocoder.geocode(geocoderRequest, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					map.setCenter(results[0].geometry.location);
+					if (!marker) {
+						marker = new google.maps.Marker({
+							map: map
+						});
+					}
+					marker.setPosition(results[0].geometry.location);
+
+					var content = '<strong>' + results[0].formatted_address + '</strong>';
+		        	//infowindow.setContent(content);
+		        	//infowindow.open(map, marker);
+				}
+			});
+
+		}
+</script>

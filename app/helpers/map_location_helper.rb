@@ -1,0 +1,2 @@
+module MapLocationHelper
+end

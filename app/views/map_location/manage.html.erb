@@ -1,0 +1,33 @@
+<div id="container_admin">
+<%= make_menu %>
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th>xval</th>
+    <th>yval</th>
+    <th>title</th>
+    <th>content</th>
+    <th>updated_at</th>
+	<th>created_at</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @maplocations.each do |location| %>
+  <tr>
+    <td><%= location.xval %></td>
+    <td><%= location.yval %></td>
+    <td><%= location.title %></td>
+    <td><%= location.content %></td>
+    <td><%= location.updated_at %></td>
+	<td><%= location.created_at %></td>
+    <td><%= link_to 'Destroy', location, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+</div>
