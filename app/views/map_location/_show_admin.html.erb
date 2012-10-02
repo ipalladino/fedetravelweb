@@ -1,17 +1,23 @@
 <div style="float:left; margin-left:20px; width:260px;">
-	<label>Address: </label>
-	<input id="address"  type="text"/> <br/>
-	<button onclick="getLocation()" >First Step - Load marker using address</button><br/>
+	<p><u>Step 1:</u>
+		<br/>
+		Search for an address to drop a pin on that location.
+	</p>
+	<input id="address"  type="text" style="width:210px; border: 1px solid blue; height:20px;"/> <br/>
+	<button onclick="getLocation()" >Drop pin</button><br/>
+	<p><u>Step 2</u><br/>
+	   Once you found the address you were looking for, add a title and a description to your entry. When you are ready press Save.
+	</p>
 	<label>Title: </label><br/>
-	<input id="title"/><br/>
-	<label>Content: </label><br/>
-	<textarea id="content"> </textarea> <br/>
-	<button onclick="saveMarker()">Second Step - Save current marker and data </button>
+	<input id="title" style="width:210px; border: 1px solid blue; height:20px;"/><br/>
+	<label>Description: </label><br/>
+	<textarea id="content" style="width:210px; border: 1px solid blue;"> </textarea> <br/>
+	<button onclick="saveMarker()">Save</button>
 	<div style="float:none"><h2 id="the_title"></h2></div>
 	<div id="the_content" style="float:none"></div>
 </div>
 
-<div id="map_canvas" style="width:450px; height:300px;float:left;margin-left:20px"></div><br/>
+<div id="map_canvas" style="min-width:200px; min-height:300px; width:62%; height:500px; float:left;margin-left:20px"></div><br/>
 
 	
 <script type="text/javascript" charset="utf-8">
