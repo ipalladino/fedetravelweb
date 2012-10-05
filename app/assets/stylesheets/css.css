@@ -44,7 +44,7 @@ img {
 h1,h2 {
     font-family:concielan;
     color:#ff9900;
-    text-shadow: 5px 5px #333;
+    text-shadow:5px 4px 5px #333;
 }
 
 h3 {
@@ -70,7 +70,7 @@ a:hover {
     height:100%;
     font-size:1.2em;
     min-width:132px;
-    text-shadow: 4px 4px #333;
+    text-shadow:5px 3px 3px #333;;
 }
 #main {
     width:85%;
@@ -101,12 +101,15 @@ a:hover {
     width:auto;
 }
 
+img {
+    box-shadow: 5px 5px 17px black;
+}
+
 #container_login {
+    margin-top:240px;
     color:#bbbbbb;
     position:fixed;
-    bottom:0px;
-    width:100%; //width should be 100%
-    height:100%;
+    width:100%; /*width should be 100%*/
 }
 
 .blurry{
