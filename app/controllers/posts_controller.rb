@@ -87,7 +87,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     timestamp = Time.now.utc.iso8601.gsub(/\W/, '')
     if(params[:post_type] != "poetry")
-      if(!params[:upload].empty?)
+      if(params[:upload])
         filename = File.basename(@post.file)
         AWS::S3::S3Object.delete(filename, @@BUCKET)
         filename = timestamp + "_" + sanitize_filename(params[:upload]['datafile'].original_filename)
