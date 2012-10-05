@@ -106,7 +106,7 @@ img {
 }
 
 #container_login {
-    margin-top:240px;
+    margin-top:300px;
     color:#bbbbbb;
     position:fixed;
     width:100%; /*width should be 100%*/
@@ -226,6 +226,11 @@ img {
     min-height:200px;
     padding:5px;
 }
+
+#map_canvas img{
+    box-shadow:none;
+}
+
 .pic_list img{
     max-width:150px;
     max-height:120px;
