@@ -51,7 +51,7 @@ class PostsController < ApplicationController
   def create
     timestamp = Time.now.utc.iso8601.gsub(/\W/, '')
     puts "Post title:" + params[:post][:title]
-    if(params[:post_type] != "poetry")
+    if(params[:post_type] != "poetry" && params[:post_type] != "blog")
       filename = timestamp + "_" + sanitize_filename(params[:upload]['datafile'].original_filename)
       puts "Saving" + filename
       AWS::S3::S3Object.store(filename, params[:upload]['datafile'].read, @@BUCKET, :access => :public_read)
@@ -86,7 +86,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     timestamp = Time.now.utc.iso8601.gsub(/\W/, '')
-    if(params[:post_type] != "poetry")
+    if(params[:post_type] != "poetry" || params[:post_type] != "blog" )
       if(params[:upload])
         filename = File.basename(@post.file)
         AWS::S3::S3Object.delete(filename, @@BUCKET)
