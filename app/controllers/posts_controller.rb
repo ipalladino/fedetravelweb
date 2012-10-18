@@ -114,7 +114,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     filename = File.basename(@post.file)
-    if(@post.post_type != "poetry")
+    if(@post.post_type != "poetry" && @post.post_type != "blog")
       AWS::S3::S3Object.delete(filename, @@BUCKET)
     end
     @post.destroy
