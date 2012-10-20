@@ -8,7 +8,7 @@ Travelweb::Application.routes.draw do
   get "pages/videos"
   get "pages/poetry"
   get "pages/maps"
-  get "pages/blog"
+  get "pages/scroll"
   get "map_location/list"
   get "map_location/manage"
   
