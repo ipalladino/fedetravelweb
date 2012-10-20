@@ -10,16 +10,16 @@ class PagesController < ApplicationController
   end
   
   def home
-    #@posts = Post.where((:post_type => "image") | (:post_type => "blog")).order("created_at DESC").limit(10)
+    @posts = Post.where("post_type = 'blog' OR post_type = 'image'").order("created_at DESC").limit(10)
     #@posts = Post.where("post_type = 'image' OR post_type = 'blog'")).order("created_at DESC").limit(10)
-    @posts = Post.where(:post_type => "image").order("created_at DESC").limit(10) | Post.where(:post_type => "blog").order("created_at DESC").limit(10)
+    #@posts = Post.where(:post_type => "image").order("created_at DESC").limit(10) | Post.where(:post_type => "blog").order("created_at DESC").limit(10)
   end
   
   def pics
     @posts = Post.where(:post_type => "image").order("created_at DESC")
   end
   
-  def blog
+  def scroll
     @posts = Post.where(:post_type => "blog").order("created_at DESC")
     render 'home'
   end
