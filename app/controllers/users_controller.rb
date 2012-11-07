@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     if(!admin?) 
       redirect_to "/"
     else
-      @users = User.all
+      @users = User.find(:all, :order => "created_at DESC")
 
       respond_to do |format|
         format.html # index.html.erb

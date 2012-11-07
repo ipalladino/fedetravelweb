@@ -11,6 +11,7 @@
     <th>Active</th>
 	<th>Login amount</th>
 	<th>Last Login</th>
+	<th>Created At</th>
     <th></th>
     <th></th>
     <th></th>
@@ -25,6 +26,7 @@
     <td><%= user.active %></td>
 	<td><%= user.login_amount %></td>
     <td><%= user.updated_at %></td>
+	<td><%= user.created_at %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
