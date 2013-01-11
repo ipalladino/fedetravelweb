@@ -79,8 +79,8 @@
 		function saveMarker() {
 			var pos = marker.getPosition();
 			var data = {
-				"xval": pos.$a,
-				"yval": pos.ab,
+				"xval": pos.lat(),
+				"yval": pos.lng(),
 				"title" : $("#title").val(),
 				"content" : $("#content").val()
 			}
