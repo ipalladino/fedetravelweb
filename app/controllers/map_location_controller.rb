@@ -14,7 +14,7 @@ class MapLocationController < ApplicationController
   end
   
   def list
-    @maps = MapLocation.find(:all)
+    @maps = MapLocation.find(:all, :order => "created_at ASC")
     render :json => @maps
   end 
 
