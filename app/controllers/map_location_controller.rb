@@ -9,7 +9,7 @@ class MapLocationController < ApplicationController
   end
   
   def manage
-    @maplocations = MapLocation.find(:all)
+    @maplocations = MapLocation.find(:all, :order => "created_at ASC")
     render :manage
   end
   
