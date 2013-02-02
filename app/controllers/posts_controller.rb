@@ -55,7 +55,7 @@ class PostsController < ApplicationController
     puts "Post title:" + params[:post][:title]
     if(params[:post_type] != "poetry" && params[:post_type] != "blog")
       img = Magick::Image.read(params[:upload]['datafile'].path)[0]
-      mage.crop_resized! 100, 100, Magick::CenterGravity
+      img.crop_resized! 100, 100, Magick::CenterGravity
         
       filename = timestamp + "_" + sanitize_filename(params[:upload]['datafile'].original_filename)
       puts "Saving" + filename
