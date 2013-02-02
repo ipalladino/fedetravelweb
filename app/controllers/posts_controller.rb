@@ -1,3 +1,5 @@
+require 'RMagick'
+
 class PostsController < ApplicationController
   @@BUCKET = "travelweb-assets"
   # GET /posts
@@ -52,9 +54,10 @@ class PostsController < ApplicationController
     timestamp = Time.now.utc.iso8601.gsub(/\W/, '')
     puts "Post title:" + params[:post][:title]
     if(params[:post_type] != "poetry" && params[:post_type] != "blog")
+      img = image_resize(params[:upload]['datafile'].read)
       filename = timestamp + "_" + sanitize_filename(params[:upload]['datafile'].original_filename)
       puts "Saving" + filename
-      AWS::S3::S3Object.store(filename, params[:upload]['datafile'].read, @@BUCKET, :access => :public_read)
+      AWS::S3::S3Object.store(filename, img, @@BUCKET, :access => :public_read)
       url = AWS::S3::S3Object.url_for(filename, @@BUCKET, :authenticated => false)
     else
       url = ''
@@ -123,6 +126,7 @@ class PostsController < ApplicationController
       format.json { head :ok }
     end
   end
+  
   def sanitize_filename(file_name)
     # get only the filename, not the whole path (from IE)
     just_filename = File.basename(file_name) 
@@ -130,4 +134,17 @@ class PostsController < ApplicationController
     # with underscore
     just_filename.sub(/[^\w\.\-]/,'_') 
   end
+  
+  def image_resize(img_data)
+      filecount = rand
+      writer = File.new("/tmp/#{filecount}.jpg", "w")
+      writer.puts(img_data)
+      writer.close
+
+      resized_image = Magick::ImageList.new("/tmp/#{filecount}.jpg").first
+      resized_image.crop_resized!(250,250, Magick::NorthGravity)
+      resized.format = 'jpeg'
+      resized_image.to_blob
+  end
+  
 end

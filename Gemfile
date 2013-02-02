@@ -10,7 +10,8 @@ gem 'json'
 #gem 'sqlite3', '1.3.5'
 gem 'pg' 
 gem 'aws-s3', '0.6.2', :require => 'aws/s3'
-
+gem "rmagick", "2.12.0", :require => 'RMagick'
+#gem "imagemagick"
 
 # Gems used only for assets and not required
 # in production environments by default.
