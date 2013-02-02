@@ -55,7 +55,7 @@ class PostsController < ApplicationController
     puts "Post title:" + params[:post][:title]
     if(params[:post_type] != "poetry" && params[:post_type] != "blog")
       img = Magick::Image.read(params[:upload]['datafile'].path)[0]
-      img.crop_resized! 100, 100, Magick::CenterGravity
+      img.crop_resized! 300, 300, Magick::CenterGravity
         
       filename = timestamp + "_" + sanitize_filename(params[:upload]['datafile'].original_filename)
       puts "Saving" + filename
@@ -97,7 +97,11 @@ class PostsController < ApplicationController
         AWS::S3::S3Object.delete(filename, @@BUCKET)
         filename = timestamp + "_" + sanitize_filename(params[:upload]['datafile'].original_filename)
         puts "Saving" + filename
-        AWS::S3::S3Object.store(filename, params[:upload]['datafile'].read, @@BUCKET, :access => :public_read)
+        
+        img = Magick::Image.read(params[:upload]['datafile'].path)[0]
+        img.crop_resized! 300, 300, Magick::CenterGravity
+        
+        AWS::S3::S3Object.store(filename, img, @@BUCKET, :access => :public_read)
         url = AWS::S3::S3Object.url_for(filename, @@BUCKET, :authenticated => false)
         @post.file = url
       end
