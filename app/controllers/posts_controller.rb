@@ -54,10 +54,12 @@ class PostsController < ApplicationController
     timestamp = Time.now.utc.iso8601.gsub(/\W/, '')
     puts "Post title:" + params[:post][:title]
     if(params[:post_type] != "poetry" && params[:post_type] != "blog")
-      img = image_resize(params[:upload]['datafile'].read)
+      img = Magick::Image.read(params[:upload]['datafile'].path)[0]
+      mage.crop_resized! 100, 100, Magick::CenterGravity
+        
       filename = timestamp + "_" + sanitize_filename(params[:upload]['datafile'].original_filename)
       puts "Saving" + filename
-      AWS::S3::S3Object.store(filename, img, @@BUCKET, :access => :public_read)
+      AWS::S3::S3Object.store(filename, img.to_blob, @@BUCKET, :access => :public_read)
       url = AWS::S3::S3Object.url_for(filename, @@BUCKET, :authenticated => false)
     else
       url = ''
