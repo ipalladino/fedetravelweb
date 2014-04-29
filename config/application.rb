@@ -10,11 +10,6 @@ if defined?(Bundler)
 end
 
 
-AWS::S3::Base.establish_connection!(
-  :access_key_id     => 'AKIAJAUJEY2OAAI3HQ2A',
-  :secret_access_key => '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'
-)
-
 module Travelweb
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
